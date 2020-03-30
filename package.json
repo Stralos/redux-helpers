@@ -1,0 +1,9 @@
+{
+  "name": "redux-helpers",
+  "version": "1.0.0",
+  "description": "Redux helpers to reduce boilerplate",
+  "main": "index.js",
+  "repository": "https://github.com/Stralos/redux-helpers.git",
+  "author": "Stralos",
+  "license": "MIT"
+}
