@@ -5,7 +5,7 @@ interface State {
   users: { id: number; name: string; age: number }[];
 }
 
-export const reducer = createReducer<State>(
+export const userReducer = createReducer<State>(
   { users: [] },
   on(addUserAction, (state, payload) => {
     state.users.push(payload);

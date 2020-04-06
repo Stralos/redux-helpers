@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "https://github.com/Stralos/redux-helpers.git",
   "author": "Stralos",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "immer": "^6.0.2",
+    "redux": "^4.0.5"
+  }
 }
