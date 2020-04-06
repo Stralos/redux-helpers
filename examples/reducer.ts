@@ -1,5 +1,10 @@
 import { on, createReducer } from "../src";
-import { addUserAction, updateUserAction, removeUserAction } from "./actions";
+import {
+  addUserAction,
+  updateUserAction,
+  removeUserAction,
+  getUsersSuccessAction,
+} from "./actions";
 
 interface State {
   users: { id: number; name: string; age: number }[];
@@ -7,15 +12,19 @@ interface State {
 
 export const userReducer = createReducer<State>(
   { users: [] },
+  on(getUsersSuccessAction, (state, payload) => {
+    state.users = payload.users;
+    return state;
+  }),
   on(addUserAction, (state, payload) => {
     state.users.push(payload);
     return state;
   }),
   on(updateUserAction, (state, payload) => {
-    state.users = state.users.map(user => {
+    state.users = state.users.map((user) => {
       if (user.id === payload.id) {
         return {
-          ...payload
+          ...payload,
         };
       }
       return user;
@@ -23,7 +32,7 @@ export const userReducer = createReducer<State>(
     return state;
   }),
   on(removeUserAction, (state, payload) => {
-    state.users = state.users.filter(user => user.id !== payload.id);
+    state.users = state.users.filter((user) => user.id !== payload.id);
     return state;
   })
 );

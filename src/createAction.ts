@@ -8,11 +8,11 @@ export interface Action<T> {
   payload: T;
 }
 
-export const createAction = <Payload>(type: string): ActionCreator<Payload> => {
-  const action = (payload?: Payload): Action<Payload> => {
+export const createAction = <T>(type: string): ActionCreator<T> => {
+  const action = (payload: T): Action<T> => {
     return {
       type,
-      payload
+      payload,
     };
   };
   action.type = type;
