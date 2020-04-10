@@ -16,5 +16,6 @@ export const createAction = <T>(type: string): ActionCreator<T> => {
     };
   };
   action.type = type;
+  action.toString = () => action.type
   return action;
 };

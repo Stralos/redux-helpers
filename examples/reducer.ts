@@ -10,8 +10,10 @@ interface State {
   users: { id: number; name: string; age: number }[];
 }
 
+const initialState: State = { users: [] };
+
 export const userReducer = createReducer<State>(
-  { users: [] },
+  initialState,
   on(getUsersSuccessAction, (state, payload) => {
     state.users = payload.users;
     return state;
