@@ -1,6 +1,6 @@
 export interface ActionCreator<T> {
-  type: string;
   (payload?: T): Action<T>;
+  toString: () => string;
 }
 
 export interface Action<T> {
@@ -15,7 +15,6 @@ export const createAction = <T>(type: string): ActionCreator<T> => {
       payload,
     };
   };
-  action.type = type;
-  action.toString = () => action.type
+  action.toString = () => type;
   return action;
 };
