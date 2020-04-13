@@ -19,7 +19,6 @@ describe("createReducer", () => {
     const addUserAction = createAction<User>("ADD_USER");
     const callback = jest.fn((state, payload) => {
       state.users.push(payload);
-      return state;
     });
     const reducer = createReducer(initialState, on(addUserAction, callback));
     const payload = {
@@ -37,7 +36,6 @@ describe("createReducer", () => {
     const randomAction = createAction("RANDOM_ACTION");
     const callback = jest.fn((state, payload) => {
       state.users.push(payload);
-      return state;
     });
     const reducer = createReducer(initialState, on(addUserAction, callback));
     expect(reducer(initialState, randomAction())).toMatchObject(initialState);
@@ -49,7 +47,6 @@ describe("createReducer", () => {
     const editingAction = createAction<User>("EDITING_ACTION");
     const callback = jest.fn((state) => {
       state.isLoading = true;
-      return state;
     });
     const reducer = createReducer(
       initialState,

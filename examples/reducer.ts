@@ -9,18 +9,15 @@ import {
 interface State {
   users: { id: number; name: string; age: number }[];
 }
-
 const initialState: State = { users: [] };
 
-export const userReducer = createReducer<State>(
+export const userReducer = createReducer(
   initialState,
   on(getUsersSuccessAction, (state, payload) => {
     state.users = payload.users;
-    return state;
   }),
   on(addUserAction, (state, payload) => {
     state.users.push(payload);
-    return state;
   }),
   on(updateUserAction, (state, payload) => {
     state.users = state.users.map((user) => {
@@ -31,10 +28,8 @@ export const userReducer = createReducer<State>(
       }
       return user;
     });
-    return state;
   }),
   on(removeUserAction, (state, payload) => {
     state.users = state.users.filter((user) => user.id !== payload.id);
-    return state;
   })
 );
