@@ -1,27 +1,38 @@
-import { Payload } from './payload';
+import { Payload } from "./payload";
 
-export interface ActionCreatorBase<T> {
+export interface ActionCreatorBase<T extends string> {
   toString(): T;
 }
 
-export interface Action<T> {
+export interface Action<T extends string> {
   type: T;
 }
 
-export interface ActionWithPayload<T, P> extends Action<T> {
+export interface ActionWithPayload<T extends string, P> extends Action<T> {
   payload: P;
 }
 
-export interface ActionCreatorNoPayload<T> extends ActionCreatorBase<T> {
+export interface ActionCreatorNoPayload<T extends string>
+  extends ActionCreatorBase<T> {
   (): Action<T>;
 }
 
-export interface ActionCreatorWithPayload<T, P> extends ActionCreatorBase<T> {
+export interface ActionCreatorWithPayload<T extends string, P>
+  extends ActionCreatorBase<T> {
   (payload: P): ActionWithPayload<T, P>;
 }
 
-export function createAction<T>(action: T): ActionCreatorNoPayload<T>;
-export function createAction<T, P>(action: T, payload: Payload<P>): ActionCreatorWithPayload<T, P>;
+export type ActionCreator<T extends string, P> =
+  | ActionCreatorNoPayload<T>
+  | ActionCreatorWithPayload<T, P>;
+
+export function createAction<T extends string>(
+  action: T
+): ActionCreatorNoPayload<T>;
+export function createAction<T extends string, P>(
+  action: T,
+  payload: Payload<P>
+): ActionCreatorWithPayload<T, P>;
 export function createAction<T, P>(type: T) {
   const result = (payload?: P) => {
     if (payload == null) {

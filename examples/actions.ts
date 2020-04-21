@@ -41,3 +41,12 @@ export const removeUserAction = createAction(
 );
 export const updateUserAction = createAction("UPDATE_USER", payload<User>());
 export const noPayloadAction = createAction("SOMETHING");
+
+export const filterUsersByAgeAction = createAction(
+  "FILTER_USERS_BY_AGE",
+  payload<{ age: number }>()
+);
+export const filterUsersByName = createAction(
+  "FILTER_USERS_BY_NAME",
+  payload<{ name: string }>()
+);
