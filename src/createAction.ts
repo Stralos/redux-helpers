@@ -1,20 +1,37 @@
-export interface ActionCreator<T> {
-  (payload?: T): Action<T>;
-  toString: () => string;
+export interface ActionCreatorBase {
+  toString(): string;
 }
 
-export interface Action<T> {
+export interface Action {
   type: string;
+}
+
+export interface ActionWithPayload<T> extends Action {
   payload: T;
 }
 
-export const createAction = <T>(type: string): ActionCreator<T> => {
-  const action = (payload: T): Action<T> => {
+export interface ActionCreatorNoPayload extends ActionCreatorBase {
+  (): Action;
+}
+
+export interface ActionCreatorWithPayload<T> extends ActionCreatorBase {
+  (payload: T): ActionWithPayload<T>;
+}
+
+export function createAction(action: string): ActionCreatorNoPayload;
+export function createAction<T>(action: string): ActionCreatorWithPayload<T>;
+export function createAction<T>(type: string) {
+  const result = (payload: T) => {
+    if (payload == null) {
+      return {
+        type: type,
+      };
+    }
     return {
-      type,
-      payload,
+      type: type,
+      payload: payload,
     };
   };
-  action.toString = () => type;
-  return action;
-};
+  result.toString = () => type;
+  return result;
+}

@@ -17,7 +17,7 @@ describe("createReducer", () => {
   it("should catch ADD_USER action and update state", () => {
     const initialState: State = { isLoading: false, users: [] };
     const addUserAction = createAction<User>("ADD_USER");
-    const callback = jest.fn((state, payload) => {
+    const callback = jest.fn((state, {payload}) => {
       state.users.push(payload);
     });
     const reducer = createReducer(initialState, on(addUserAction, callback));
@@ -34,7 +34,7 @@ describe("createReducer", () => {
     const initialState: State = { isLoading: false, users: [] };
     const addUserAction = createAction<User>("ADD_USER");
     const randomAction = createAction("RANDOM_ACTION");
-    const callback = jest.fn((state, payload) => {
+    const callback = jest.fn((state, {payload}) => {
       state.users.push(payload);
     });
     const reducer = createReducer(initialState, on(addUserAction, callback));
@@ -43,8 +43,8 @@ describe("createReducer", () => {
 
   it("should support multiple actions for same callback", () => {
     const initialState: State = { isLoading: false, users: [] };
-    const loadingAction = createAction<User>("LOADING_ACTION");
-    const editingAction = createAction<User>("EDITING_ACTION");
+    const loadingAction = createAction("LOADING_ACTION");
+    const editingAction = createAction("EDITING_ACTION");
     const callback = jest.fn((state) => {
       state.isLoading = true;
     });

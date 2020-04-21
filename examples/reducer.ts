@@ -3,7 +3,7 @@ import {
   addUserAction,
   updateUserAction,
   removeUserAction,
-  getUsersSuccessAction,
+  getUsersSuccessAction
 } from "./actions";
 
 interface State {
@@ -13,13 +13,13 @@ const initialState: State = { users: [] };
 
 export const userReducer = createReducer(
   initialState,
-  on(getUsersSuccessAction, (state, payload) => {
+  on(getUsersSuccessAction, (state, { payload }) => {
     state.users = payload.users;
   }),
-  on(addUserAction, (state, payload) => {
+  on(addUserAction, (state, { payload }) => {
     state.users.push(payload);
   }),
-  on(updateUserAction, (state, payload) => {
+  on(updateUserAction, (state, { payload }) => {
     state.users = state.users.map((user) => {
       if (user.id === payload.id) {
         return {
@@ -29,7 +29,7 @@ export const userReducer = createReducer(
       return user;
     });
   }),
-  on(removeUserAction, (state, payload) => {
+  on(removeUserAction, (state, {payload}) => {
     state.users = state.users.filter((user) => user.id !== payload.id);
   })
 );

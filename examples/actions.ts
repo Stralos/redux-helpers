@@ -34,3 +34,4 @@ export const getUsersFailAction = createAction<RequestFailure>(
 export const addUserAction = createAction<User>("ADD_USER");
 export const removeUserAction = createAction<RemoveUser>("REMOVE_USER");
 export const updateUserAction = createAction<User>("UPDATE_USER");
+export const noPayloadAction = createAction('SOMETHING')
