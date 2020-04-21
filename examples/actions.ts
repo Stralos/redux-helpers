@@ -1,4 +1,4 @@
-import { createAction } from "../src";
+import { createAction, payload } from "../src";
 
 interface RequestFailure {
   ex: string;
@@ -22,16 +22,22 @@ interface RemoveUser {
   id: number;
 }
 
-export const getUsersRequestAction = createAction<GetUsersPayload>(
-  "GET_USERS_REQUEST"
+export const getUsersRequestAction = createAction(
+  "GET_USERS_REQUEST",
+  payload<GetUsersPayload>()
 );
-export const getUsersSuccessAction = createAction<UsersResponsePayload>(
-  "GET_USERS_SUCCESS"
+export const getUsersSuccessAction = createAction(
+  "GET_USERS_SUCCESS",
+  payload<UsersResponsePayload>()
 );
-export const getUsersFailAction = createAction<RequestFailure>(
-  "GET_USERS_FAIL"
+export const getUsersFailAction = createAction(
+  "GET_USERS_FAIL",
+  payload<RequestFailure>()
 );
-export const addUserAction = createAction<User>("ADD_USER");
-export const removeUserAction = createAction<RemoveUser>("REMOVE_USER");
-export const updateUserAction = createAction<User>("UPDATE_USER");
-export const noPayloadAction = createAction('SOMETHING')
+export const addUserAction = createAction("ADD_USER", payload<User>());
+export const removeUserAction = createAction(
+  "REMOVE_USER",
+  payload<RemoveUser>()
+);
+export const updateUserAction = createAction("UPDATE_USER", payload<User>());
+export const noPayloadAction = createAction("SOMETHING");

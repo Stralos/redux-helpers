@@ -1,6 +1,7 @@
 import { createReducer } from "../createReducer";
 import { createAction } from "../createAction";
 import { on } from "../on";
+import { payload } from '../payload';
 
 interface User {
   name: string;
@@ -16,26 +17,26 @@ interface State {
 describe("createReducer", () => {
   it("should catch ADD_USER action and update state", () => {
     const initialState: State = { isLoading: false, users: [] };
-    const addUserAction = createAction<User>("ADD_USER");
-    const callback = jest.fn((state, {payload}) => {
-      state.users.push(payload);
+    const addUserAction = createAction("ADD_USER", payload<User>());
+    const callback = jest.fn((state, action) => {
+      state.users.push(action.payload);
     });
     const reducer = createReducer(initialState, on(addUserAction, callback));
-    const payload = {
+    const user = {
       name: "James",
       age: 23,
       id: 1,
     };
-    const result = reducer(initialState, addUserAction(payload));
-    expect(result).toMatchObject({ users: [payload] });
+    const result = reducer(initialState, addUserAction(user));
+    expect(result).toMatchObject({ users: [user] });
   });
 
   it("should return default state if no action is consumed", () => {
     const initialState: State = { isLoading: false, users: [] };
-    const addUserAction = createAction<User>("ADD_USER");
+    const addUserAction = createAction("ADD_USER", payload<User>());
     const randomAction = createAction("RANDOM_ACTION");
-    const callback = jest.fn((state, {payload}) => {
-      state.users.push(payload);
+    const callback = jest.fn((state, action) => {
+      state.users.push(action.payload);
     });
     const reducer = createReducer(initialState, on(addUserAction, callback));
     expect(reducer(initialState, randomAction())).toMatchObject(initialState);
