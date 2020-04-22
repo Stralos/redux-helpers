@@ -1,4 +1,4 @@
-import { Action, ActionCreator } from "./createAction";
+import { Action, ActionCreator, ActionCreatorNoPayload } from "./createAction";
 
 export const is = <T extends string, P, AC extends ActionCreator<T, P>>(
   action: Action<T>,
@@ -11,3 +11,4 @@ export const is = <T extends string, P, AC extends ActionCreator<T, P>>(
   }
   return result;
 };
+
