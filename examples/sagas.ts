@@ -8,6 +8,7 @@ import {
 function* getUsersSaga({ payload }: ReturnType<typeof getUsersRequestAction>) {
   try {
     const { from, to } = payload;
+    console.log(from, to);
     yield put(
       getUsersSuccessAction({ users: [{ name: "Peter", age: 21, id: 0 }] })
     );

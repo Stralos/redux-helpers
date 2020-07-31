@@ -1,5 +1,4 @@
 import {
-  createAction,
   Action,
   ActionWithPayload,
   ActionCreator,
@@ -17,13 +16,13 @@ export const on = <
   ActionC extends ActionCreator<Type, Payload>
 >(
   actionCreator: ActionC | ActionC[],
-  reducer: (state: State, action: ReturnType<ActionC>) => void
+  reducer: On<State, Type, Payload>["reducer"]
 ): On<State, Type, Payload> => {
   const actions = Array.isArray(actionCreator)
     ? actionCreator.map(({ toString }) => toString())
     : [actionCreator.toString()];
   return {
     actions,
-    reducer,
+    reducer: reducer,
   };
 };
