@@ -7,7 +7,7 @@
   "author": "Stralos",
   "license": "MIT",
   "dependencies": {
-    "immer": "^6.0.2"
+    "immer": "^8.0.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
